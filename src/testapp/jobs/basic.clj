@@ -23,27 +23,6 @@
 
 (defmethod register-job "kafka-job"
   [job-name config]
-  (let [batch-settings {:onyx/batch-size 1
-                        :onyx/batch-timeout 1000
-                        :onyx/min-peers 1
-                        :onyx/max-peers 1}
-        kafka-in-opts {:onyx/name :in
-                       :onyx/plugin :onyx.plugin.kafka/read-messages
-                       :onyx/type :input
-                       :onyx/medium :kafka
-                       :kafka/topic "my-message-stream"
-                       :kafka/group-id "onyx-consumer"
-                       :kafka/fetch-size 307200
-                       :kafka/chan-capacity 1000
-                       :kafka/zookeeper "127.0.0.1:2181"
-                       :kafka/offset-reset :smallest
-                       :kafka/force-reset? true
-                       :kafka/empty-read-back-off 500
-                       :kafka/commit-interval 500
-                       :kafka/deserializer-fn :testapp.shared/deserialize-message-json
-                       :kafka/wrap-with-metadata? false
-                       :onyx/min-peers 1
-                       :onyx/max-peers 1
-                       :onyx/batch-size 100
-                       :onyx/doc "Reads messages from a Kafka topic"}]
+  (let [batch-settings (:batch-config config)
+        kafka-in-opts (:kafka-config config)]
     (basic-job batch-settings kafka-in-opts)))
