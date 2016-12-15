@@ -2,7 +2,7 @@
   (:require [schema.core :as s]))
 
 (defn get-data [fn-data]
-  (println fn-data))
+  (str (:message fn-data) " wibble"))
 
 (s/defn process-kafka
   ([task-name :- s/Keyword task-opts]

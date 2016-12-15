@@ -11,6 +11,7 @@
             [onyx.plugin [core-async]]
             ;; Load our tasks
             [testapp.tasks [math]]
+            [onyx.plugin.s3-output]
             ;; Load our jobs
             [testapp.jobs [basic]]))
 
